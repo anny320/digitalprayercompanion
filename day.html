@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Reflection — Digital Prayer Companion</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🙏</text></svg>" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">🙏 Digital <span>Prayer Companion</span></a>
+    <button class="nav__toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav__links">
+      <li><a href="journey.html">← Back to Journey</a></li>
+      <li><a href="facilitator.html">Facilitator Guide</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="day-app"></div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__logo">🙏 Digital Prayer Companion</div>
+    <ul class="footer__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <p class="footer__copy">Your journal is private — always.</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+/* ── Day Content Data ───────────────────────────────── */
+const DAY_DATA = {
+  1: {
+    title: "Surrender & Alignment",
+    emoji: "🤲",
+    verse: "Trust in the Lord with all your heart, and do not lean on your own understanding. In all your ways acknowledge him, and he will make straight your paths.",
+    verseRef: "Proverbs 3:5–6",
+    theme: "Today is about releasing control and trusting God completely. Surrender isn't weakness — it's the highest act of faith.",
+    reflection: "We often carry the weight of our plans, fears, and desires as though everything depends on us. But today, God invites you to set it all down. Surrender means saying: \"Not my will, but Yours.\" When we align our hearts with God's purposes, we stop striving and start flowing in His grace. This isn't passive — it's active trust.",
+    prompts: [
+      "What area of your life are you struggling to fully surrender to God?",
+      "What would it feel like to trust God completely in that area today?",
+      "What does 'alignment with God' look like in your daily decisions?",
+      "Write a prayer releasing your specific burdens to God right now."
+    ],
+    prayer: "Father, I come before You with open hands. I release every plan, fear, and desire that I have been holding too tightly. I choose to trust You — even when I cannot see the path. Align my will with Yours. Make my heart a dwelling place for Your peace. I surrender it all to You today. Amen.",
+    declaration: "I surrender my plans, fears, and desires to God. I trust His path for my life. I choose alignment over anxiety, faith over control.",
+    fasting: "Consider abstaining from social media today to create space for God's voice."
+  },
+  2: {
+    title: "Repentance & Cleansing",
+    emoji: "🌊",
+    verse: "If we confess our sins, he is faithful and just to forgive us our sins and to cleanse us from all unrighteousness.",
+    verseRef: "1 John 1:9",
+    theme: "Repentance is not punishment — it is the doorway to freedom and fresh beginnings.",
+    reflection: "Many people avoid repentance because it feels like shame. But biblical repentance is the opposite of shame — it is the relief of being fully known and fully loved. When we bring our mistakes, failures, and sins into the light, God's forgiveness meets us there. Cleansing follows confession. This is where new beginnings are born.",
+    prompts: [
+      "Is there anything weighing on your heart that you haven't fully brought before God?",
+      "What does genuine repentance (not just regret) look like for you today?",
+      "How has God's forgiveness changed your perspective on past mistakes?",
+      "Is there someone you may need to apologize to as part of your cleansing?"
+    ],
+    prayer: "Heavenly Father, I come before You honestly today. I acknowledge where I have fallen short — in my actions, words, and thoughts. I receive Your forgiveness fully. Wash me clean, Lord. Let no guilt or shame linger where Your grace has already spoken. Renew a right spirit within me. Amen.",
+    declaration: "I am forgiven and cleansed by the blood of Jesus. I walk in freedom, not condemnation. I release shame and receive God's grace.",
+    fasting: "Fast from negative self-talk today. Every critical thought about yourself — release it to God."
+  },
+  3: {
+    title: "Clarity & Direction",
+    emoji: "🌟",
+    verse: "If any of you lacks wisdom, let him ask God, who gives generously to all without reproach, and it will be given him.",
+    verseRef: "James 1:5",
+    theme: "Confusion dissipates in God's presence. Today, ask boldly for wisdom and direction.",
+    reflection: "There are seasons when the path ahead feels foggy. Decisions feel heavy. The future feels uncertain. But God promises to give wisdom generously to those who ask. Clarity doesn't always come all at once — sometimes it comes step by step, like a lamp illuminating just enough of the road ahead for you to take the next step in faith.",
+    prompts: [
+      "What decision or area of life are you most in need of clarity about right now?",
+      "What would taking 'one step of faith' look like in your current situation?",
+      "How do you distinguish between God's direction and your own desires?",
+      "Write down three things you feel God may be saying to you in this season."
+    ],
+    prayer: "Lord, I need Your wisdom today. The path ahead is unclear, but I know You see it fully. Speak to me through Your Word, through stillness, through those around me. Give me eyes to see what You are doing and courage to follow where You lead. Bring clarity to every area of confusion. Amen.",
+    declaration: "God is my source of wisdom and direction. I have clarity because I have access to the mind of Christ. I will not be paralyzed by confusion.",
+    fasting: "Take 20 minutes of silence today — no phone, no noise. Simply listen."
+  },
+  4: {
+    title: "Faith Over Fear",
+    emoji: "⚓",
+    verse: "Fear not, for I am with you; be not dismayed, for I am your God. I will strengthen you, yes, I will help you, I will uphold you with My righteous right hand.",
+    verseRef: "Isaiah 41:10",
+    theme: "Fear is a liar. Faith is the antidote. Today, choose to stand on what God has said over what fear whispers.",
+    reflection: "Fear is one of the enemy's most powerful tools — not because it is real, but because it feels real. It whispers \"what if\" and steals your peace before anything has even happened. But God's Word says over and over again: Fear not. Not because life is without danger, but because God is with you. Faith doesn't mean having no fear — it means taking the step anyway, anchored in God's promises.",
+    prompts: [
+      "What fear has been holding you back from stepping into God's calling for your life?",
+      "What specific promise from God's Word speaks to your current fear?",
+      "Think of a time God came through for you. How does that strengthen your faith today?",
+      "What would you do differently if you knew God was 100% with you in it?"
+    ],
+    prayer: "Father, I choose faith over fear today. I will not be held captive by what might happen or what others think. Your Word says You are with me — and that is enough. Strengthen me where I am weak. Let Your perfect love cast out every fear. I walk forward in confidence today. Amen.",
+    declaration: "I will not be moved by fear. God's presence is my anchor. I choose faith over every fearful thought, and I step forward in boldness.",
+    fasting: "Fast from consuming news or content that increases anxiety. Fill that space with worship."
+  },
+  5: {
+    title: "Purpose & Calling",
+    emoji: "🔥",
+    verse: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
+    verseRef: "Jeremiah 29:11",
+    theme: "You are not an accident. God placed specific gifts, passions, and purpose within you — and He is calling it forward.",
+    reflection: "Before you were born, God already had a plan for your life. Purpose isn't something you find — it's something you discover as you walk closely with God. Your unique story, your wounds, your gifts, your experiences — all of it is being woven into something meaningful. You are called to something greater than you can see right now.",
+    prompts: [
+      "What activities or causes make you feel most alive and connected to God's heart?",
+      "What do the people who know you best say are your greatest gifts?",
+      "How does your current season of life connect to the bigger purpose God has for you?",
+      "What one step toward your calling could you take this week?"
+    ],
+    prayer: "God, You placed dreams and gifts in me before I understood them. Awaken what has been dormant. Clarify my calling. Help me steward every gift You've given me for Your glory. Remove the distractions that pull me from my purpose. Let me live a life of intentional, purposeful faith. Amen.",
+    declaration: "I am created with purpose. My gifts and calling are real and needed. I commit to walking boldly in what God has placed within me.",
+    fasting: "Fast from busyness today. Protect an hour of your time for reflection and prayer about your calling."
+  },
+  6: {
+    title: "Healing & Wholeness",
+    emoji: "💚",
+    verse: "He heals the brokenhearted and binds up their wounds.",
+    verseRef: "Psalm 147:3",
+    theme: "God is in the healing business — body, mind, soul, and spirit. You are allowed to ask for wholeness.",
+    reflection: "Healing comes in many forms: physical, emotional, relational, and spiritual. Some wounds are obvious — we know they're there. Others have been buried so long we've normalized the pain. But God sees every broken place. He doesn't ask us to be strong before He heals us. He comes to us in our brokenness and begins His work from there. Wholeness is His will for you.",
+    prompts: [
+      "What area of your life — physical, emotional, or spiritual — most needs healing right now?",
+      "Is there a past wound you've been carrying that you haven't fully released to God?",
+      "How do you receive healing? What would it look like to be fully whole in this area?",
+      "Write a prayer specifically asking God for healing in a vulnerable area of your life."
+    ],
+    prayer: "Lord Jesus, You are the Healer. I come to You with the places that hurt — the wounds I can name and those too deep for words. Heal my body where it is broken. Heal my mind where it is clouded. Heal my heart where it is wounded. Make me whole from the inside out. I receive Your healing today. Amen.",
+    declaration: "By His stripes I am healed. I receive God's healing in every area of my life — body, mind, and soul. I am being made whole.",
+    fasting: "Fast from rehearsing old hurts today. When painful memories surface, speak healing over them."
+  },
+  7: {
+    title: "Gratitude & Praise",
+    emoji: "🎶",
+    verse: "Give thanks in all circumstances; for this is the will of God in Christ Jesus for you.",
+    verseRef: "1 Thessalonians 5:18",
+    theme: "Gratitude shifts your perspective from what you lack to the abundance of what God has already done.",
+    reflection: "Gratitude is a spiritual discipline — and a powerful weapon. When we choose thankfulness, we break the cycle of complaint and open our hearts to receive more of what God has for us. Praise doesn't require perfect circumstances. It requires a heart that remembers: God was faithful yesterday, He is faithful today, and He will be faithful tomorrow.",
+    prompts: [
+      "List 10 things — big or small — you are genuinely grateful for today.",
+      "Think of a difficult season you went through. What did God teach you or do for you in it?",
+      "How does your level of gratitude affect your relationship with God and others?",
+      "Write a personal psalm of thanksgiving to God from your heart."
+    ],
+    prayer: "Father, I thank You. For life, for breath, for grace that is new every morning. For doors You opened that I didn't deserve. For protection I didn't see. For love that never fails. I praise You not just for what You do, but for who You are. Let my life be an offering of thanks. Amen.",
+    declaration: "I am a person of gratitude and praise. I choose thankfulness over complaint. My life is a testimony of God's goodness and faithfulness.",
+    fasting: "Replace one hour of entertainment with worship music. Let praise fill the space."
+  },
+  8: {
+    title: "Family & Relationships",
+    emoji: "👨‍👩‍👧",
+    verse: "Be completely humble and gentle; be patient, bearing with one another in love. Make every effort to keep the unity of the Spirit through the bond of peace.",
+    verseRef: "Ephesians 4:2–3",
+    theme: "The people in your life are not accidents. Today, pray for the relationships God has entrusted to you.",
+    reflection: "Family and relationships are where faith is truly tested. It is easy to love God when life is peaceful. It is harder to reflect His love when those closest to us frustrate, wound, or misunderstand us. Yet God calls us to be patient, humble, and peaceable — not because others always deserve it, but because that is the character of Christ being formed in us.",
+    prompts: [
+      "Which relationship in your life needs the most prayer and intentionality right now?",
+      "Is there a pattern of conflict or disconnection you can take responsibility for?",
+      "How is God calling you to show up differently in your family or close relationships?",
+      "Write a prayer for each member of your immediate family by name."
+    ],
+    prayer: "Lord, bless my family and those You have placed in my life. Heal what is broken. Strengthen what is fragile. Give me patience where I am frustrated, grace where I've been harsh, and wisdom to love well. Unite us in Your peace. Let our relationships reflect Your love. Amen.",
+    declaration: "I am a peacemaker in my relationships. I love with patience and grace. God is healing and strengthening every relationship He has entrusted to me.",
+    fasting: "Fast from criticism of family members today. Replace every critical thought with a prayer for that person."
+  },
+  9: {
+    title: "Finances & Provision",
+    emoji: "🌾",
+    verse: "And my God will supply every need of yours according to his riches in glory in Christ Jesus.",
+    verseRef: "Philippians 4:19",
+    theme: "God is Jehovah Jireh — the Lord who provides. Your needs are not too big for Him.",
+    reflection: "Financial stress is one of the most common sources of anxiety in modern life. But God's Word is clear: He is your provider. This doesn't mean financial irresponsibility is rewarded, but it does mean that when we are faithful, trusting, and obedient, God meets our needs in ways that exceed our own ability to provide. Today, bring your financial situation honestly before God.",
+    prompts: [
+      "What financial concerns are weighing on you most heavily right now?",
+      "Where do you need to trust God more and stress less in your finances?",
+      "Are there any areas where God may be calling you to greater stewardship or generosity?",
+      "Write a prayer of trust, releasing financial worry to God."
+    ],
+    prayer: "Jehovah Jireh, You are my provider. I release every financial worry to You today. I trust that You see my needs and that You are already at work. Give me wisdom to steward well, faith to give generously, and peace that surpasses financial anxiety. You have never failed me, and I trust You now. Amen.",
+    declaration: "God is my source and provision. I am not defined by my financial situation. I am a faithful steward and I trust God to supply every need.",
+    fasting: "Fast from unnecessary purchases today. Give what you would have spent as an offering or act of generosity."
+  },
+  10: {
+    title: "Work & Career",
+    emoji: "🛠️",
+    verse: "Whatever you do, work heartily, as for the Lord and not for men.",
+    verseRef: "Colossians 3:23",
+    theme: "Your work is a form of worship. Today, invite God into your Monday through Friday.",
+    reflection: "For many of us, faith stays in Sunday morning while work operates on a completely different track. But God never compartmentalizes. He is Lord of every area — including your career. Your work is not separate from your calling; it is often the ground where your calling is lived out. Excellence, integrity, and compassion in the workplace are powerful testimony.",
+    prompts: [
+      "How is your faith currently visible (or not visible) in your workplace?",
+      "What would it look like to do your work 'as for the Lord' this week?",
+      "Are there areas of your career where God may be directing you toward change?",
+      "Who at your workplace might need to see God's love through your actions?"
+    ],
+    prayer: "Lord, I dedicate my work to You. Let my efforts, relationships, and output reflect Your character. Give me wisdom for the challenges I face. Let my integrity speak louder than any title or position. Guide my career in the direction of Your purpose. May what I build with my hands bring honor to Your name. Amen.",
+    declaration: "I work with excellence and integrity as an act of worship. My career is under God's direction. I am a light in my workplace.",
+    fasting: "Fast from complaining about work today. Replace every grievance with a prayer."
+  },
+  11: {
+    title: "Discipline & Consistency",
+    emoji: "⚡",
+    verse: "No discipline seems pleasant at the time, but painful. Later on, however, it produces a harvest of righteousness and peace for those who have been trained by it.",
+    verseRef: "Hebrews 12:11",
+    theme: "Spiritual discipline is not about earning God's love — it's about positioning yourself to receive more of it.",
+    reflection: "Discipline often feels like restriction, but it is actually the path to freedom. When we are disciplined in prayer, in the Word, in serving — we are not earning brownie points with God. We are positioning our hearts to receive, to grow, to become more like Christ. Consistency, even in small things, produces extraordinary results over time. Every habit of faith you build today is an investment in who you are becoming.",
+    prompts: [
+      "What spiritual discipline is God calling you to grow in during this season?",
+      "What gets in the way of your consistency in prayer and Bible reading?",
+      "What is one small daily habit that could strengthen your faith over time?",
+      "Write a commitment to God about one discipline you will practice for the rest of this journey."
+    ],
+    prayer: "Father, I want to be a person of godly discipline. Help me to be consistent — not out of religious duty, but out of deep love for You. Remove every distraction and laziness that keeps me from the habits that grow my faith. Produce in me the fruit of self-control and perseverance. Amen.",
+    declaration: "I am disciplined and consistent in my faith. I commit to the habits that grow my spirit. Small daily choices are shaping me into who God has called me to be.",
+    fasting: "Fast from your biggest time-waster today (scrolling, TV, etc.) and use that time for prayer."
+  },
+  12: {
+    title: "Obedience",
+    emoji: "🎯",
+    verse: "If you love me, you will keep my commandments.",
+    verseRef: "John 14:15",
+    theme: "Obedience is love in action. Where God is calling, trust is expressed through your yes.",
+    reflection: "Obedience can feel like loss of freedom — but Jesus reframes it entirely. He connects obedience to love. When we truly love God, obedience becomes the natural expression of that love. The hardest obedience is usually the one that requires the most surrender: the conversation you've been avoiding, the step you've been afraid to take, the thing God has been nudging you toward that seems impossible.",
+    prompts: [
+      "Is there something God has been asking you to do that you have been delaying?",
+      "What has partial obedience cost you in a past season?",
+      "How does obedience to God free you rather than restrict you?",
+      "Write the thing you believe God is calling you to do, and pray over it."
+    ],
+    prayer: "Lord, I want to be fully obedient to Your voice. Remove my resistance, my excuses, and my fear. Where I have been holding back, give me courage to say yes. I trust that Your commands are not burdensome — they are the path to life. Teach me to hear Your voice clearly and to follow without delay. Amen.",
+    declaration: "I am obedient to God's voice. My yes to God costs me nothing I cannot afford to lose. I walk in the joy of full surrender and obedience.",
+    fasting: "Do the one thing today that you have been postponing in obedience to God. Take that step."
+  },
+  13: {
+    title: "Peace & Rest",
+    emoji: "🕊️",
+    verse: "And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus.",
+    verseRef: "Philippians 4:7",
+    theme: "Peace is not the absence of problems — it is the presence of God in the midst of them.",
+    reflection: "We live in a world that rewards hustle and punishes stillness. But God created rest — not as a reward for finishing, but as a rhythm for flourishing. Peace is not passive; it is a choice to position your heart in the truth of who God is. Jesus slept through a storm not because the storm wasn't real, but because He knew who held the sea. That same peace is available to you.",
+    prompts: [
+      "What is robbing you of peace in this season? Name it honestly.",
+      "What does 'rest in God' practically look like for your life right now?",
+      "Where have you been striving for a result that only God can produce?",
+      "Write a prayer releasing anxiety and choosing God's peace today."
+    ],
+    prayer: "Prince of Peace, I invite You into every anxious place in my heart. Still the storms. Quiet the noise. Guard my mind against every worry that exceeds my faith. Let Your peace — the kind that makes no logical sense — fill every room of my heart. I choose rest in You today. Amen.",
+    declaration: "I have the peace of God that surpasses understanding. I choose rest over striving. My heart is guarded by God's perfect peace.",
+    fasting: "Fast from rushing today. Move slowly, intentionally, and prayerfully through each task."
+  },
+  14: {
+    title: "Spiritual Growth",
+    emoji: "🌱",
+    verse: "But grow in the grace and knowledge of our Lord and Savior Jesus Christ.",
+    verseRef: "2 Peter 3:18",
+    theme: "Spiritual maturity is not a destination — it is a lifelong journey of becoming more like Christ.",
+    reflection: "Growth is rarely comfortable. Seeds must be buried before they can bloom. Pruning happens before fruit appears. The trials, questions, and stretching seasons of our faith are not signs that God has abandoned us — they are often the very tools He uses to grow us. A plant that never grows is either dying or has stopped receiving what it needs. Today, ask God what He wants to grow in you.",
+    prompts: [
+      "In what area of your faith have you experienced the most growth in the last year?",
+      "What has been the hardest season of your spiritual life, and what grew from it?",
+      "Where is God currently stretching you beyond your comfort zone?",
+      "What spiritual practice or input has most contributed to your growth?"
+    ],
+    prayer: "Father, I want to grow. I don't want to stay the same. Prune whatever is unfruitful. Water what is good. Send the people, words, and experiences into my life that will accelerate my growth. Make me more like Christ, even when the process is uncomfortable. I trust Your work in me. Amen.",
+    declaration: "I am growing in grace and knowledge every day. Every challenge is an opportunity. I am becoming more like Christ — in character, in wisdom, and in love.",
+    fasting: "Fast from spiritual complacency. Read one chapter of the Bible you've never deeply studied before."
+  },
+  15: {
+    title: "Forgiveness",
+    emoji: "💛",
+    verse: "Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you.",
+    verseRef: "Colossians 3:13",
+    theme: "Forgiveness is not excusing the wrong. It is releasing yourself from the prison of bitterness.",
+    reflection: "Unforgiveness is a weight we carry while believing it punishes someone else. But bitterness, resentment, and offense primarily hurt the one holding them. To forgive is not to say what happened was okay — it is to say: I refuse to let this define me or hold me back. God's forgiveness of us is the model and the power source for forgiving others. Where He forgave infinitely, we can forgive once more.",
+    prompts: [
+      "Is there someone you are carrying offense or unforgiveness toward, even silently?",
+      "How has unforgiveness affected your relationship with God or others?",
+      "What would it practically mean to forgive that person today — not for their sake, but yours?",
+      "Write a prayer of release over anyone you need to forgive."
+    ],
+    prayer: "Lord, I choose to forgive [name]. Not because what happened was right, but because You have forgiven me of so much more. I release the offense, the hurt, and the desire for justice into Your hands. Heal my heart where it has been wounded by this. Set me free from bitterness and let Your love fill that space. Amen.",
+    declaration: "I am a person who forgives freely. I release every offense. Bitterness has no hold on me. I walk in the freedom of forgiveness.",
+    fasting: "Abstain from revisiting or retelling a grievance today. Every time it surfaces, speak forgiveness instead."
+  },
+  16: {
+    title: "Confidence in God",
+    emoji: "🦁",
+    verse: "Therefore do not throw away your confidence, which has a great reward.",
+    verseRef: "Hebrews 10:35",
+    theme: "Your confidence is not in yourself — it's in the God who called you, equipped you, and is with you.",
+    reflection: "There is a difference between self-confidence and God-confidence. Self-confidence depends on your performance, your track record, and your circumstances. God-confidence is rooted in the unchanging character of who God is. When He calls you, He equips you. When He sends you, He goes with you. Your confidence is only as strong as who you place it in — and God never fails.",
+    prompts: [
+      "In what area of your life do you struggle most with confidence or self-doubt?",
+      "What does God say about you in His Word that contradicts the lies you believe about yourself?",
+      "How would you live differently if you were fully confident in God's backing?",
+      "Write 5 affirmations rooted in scripture about who God says you are."
+    ],
+    prayer: "Father, I reject every lie that says I am not enough. I am enough because You are with me. Give me bold confidence that is not arrogance, but rooted in deep trust in You. Let me walk into every room, every challenge, every calling knowing that the One who created the universe is with me. Amen.",
+    declaration: "I am confident in God. I know who I am and whose I am. I step forward boldly, knowing God goes before me and stands behind me.",
+    fasting: "Fast from self-deprecating language today. Not one negative statement about yourself allowed."
+  },
+  17: {
+    title: "Patience & Trust",
+    emoji: "⏳",
+    verse: "But if we hope for what we do not see, we wait for it with patience.",
+    verseRef: "Romans 8:25",
+    theme: "Waiting on God is not wasted time. It is sacred time of preparation and trust.",
+    reflection: "We live in an instant world — instant answers, instant gratification, instant feedback. But God often works in seasons, not seconds. The waiting room is not a punishment. It is a place of preparation where God is developing in you what is needed for what He is preparing for you. Patience is not passive resignation — it is active, expectant trust.",
+    prompts: [
+      "What are you currently waiting for that is testing your patience?",
+      "What has God taught you in past seasons of waiting?",
+      "How do you maintain faith and joy while waiting for God's promises to manifest?",
+      "Write a declaration of trust specifically over what you're waiting for."
+    ],
+    prayer: "Lord, I choose to trust Your timing. I will not run ahead of You or lag behind in unbelief. What You have promised, You will perform. Teach me the grace of waiting well. While I wait, strengthen my faith, deepen my roots, and prepare me for what is coming. I trust You. Amen.",
+    declaration: "I trust God's timing perfectly. While I wait, I grow. What God has promised for my life will come to pass in His perfect time.",
+    fasting: "Fast from rushing God's answers today. Don't look for shortcuts — sit in the wait with Him."
+  },
+  18: {
+    title: "Community & Service",
+    emoji: "🤝",
+    verse: "Carry each other's burdens, and in this way you will fulfill the law of Christ.",
+    verseRef: "Galatians 6:2",
+    theme: "Faith was never meant to be practiced alone. You need community, and community needs you.",
+    reflection: "The Christian life is not a solo journey. We are built for community — to give and receive, to carry and be carried. The early church turned the world upside down not because of individual superheroes, but because ordinary people did life together with extraordinary love. Service is how that love becomes visible. Today, ask God who in your community needs what He has placed in you.",
+    prompts: [
+      "Are you currently planted in a faith community? What is your role there?",
+      "Who in your sphere of influence is carrying a burden you could help bear?",
+      "How can you serve someone today with your time, resources, or encouragement?",
+      "What gift or ability do you have that could benefit your community right now?"
+    ],
+    prayer: "Lord, make me a person who builds up, not tears down. Show me someone who needs what You have placed in me. Let my life be a gift to my community. Give me humility to receive from others when I am in need. Build Your Church through us — a community marked by love and service. Amen.",
+    declaration: "I am planted in community and I flourish there. I use my gifts to serve others. I am a burden-bearer and a blessing-bringer wherever I go.",
+    fasting: "Perform one act of service today — for someone who cannot repay you."
+  },
+  19: {
+    title: "Breakthrough & Hope",
+    emoji: "🚀",
+    verse: "May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit.",
+    verseRef: "Romans 15:13",
+    theme: "Breakthrough is coming. Hope is not wishful thinking — it is confident expectation in a God who keeps His word.",
+    reflection: "Hope is one of the most powerful forces available to a believer. The enemy's strategy is always to make you feel that nothing will ever change, that breakthrough is for others, that your situation is hopeless. But hope anchored in God is unshakable. It is not denial of your current reality — it is confidence in a God who steps into impossible situations and writes new endings. Your breakthrough is not a question of whether, but when.",
+    prompts: [
+      "What area of your life are you most in need of breakthrough right now?",
+      "What would life look like on the other side of this breakthrough?",
+      "What scriptures or testimonies of God's faithfulness give you the most hope?",
+      "Write a prayer specifically asking God for breakthrough in a named area."
+    ],
+    prayer: "God of breakthroughs, I believe You are moving in my situation right now. I refuse to accept that this is permanent. I call forth breakthrough in [specific area]. Let hope arise in me. Let the Holy Spirit flood every discouraged place with Your presence and expectation. I believe my testimony is being written. Amen.",
+    declaration: "I am full of hope. Breakthrough belongs to me. God is at work in every impossible situation in my life. My testimony is already being written.",
+    fasting: "Fast from speaking defeat over your situation. Only speak breakthrough and possibility today."
+  },
+  20: {
+    title: "Thanksgiving & Testimony",
+    emoji: "🙌",
+    verse: "Give thanks to the Lord, for he is good; his love endures forever.",
+    verseRef: "Psalm 107:1",
+    theme: "Your testimony is not just your story — it is evidence of God's power for everyone watching.",
+    reflection: "A testimony is more than a spiritual highlight reel. It is the honest account of God's faithfulness woven through your real life — including the hard parts. When you share what God has done, you release faith in others to believe for their own breakthrough. You are also reminding yourself of every reason to trust Him for what lies ahead. Thanksgiving is the fuel that keeps faith burning.",
+    prompts: [
+      "Write your personal testimony — what has God brought you through?",
+      "What has changed in you during these past 20 days of prayer and fasting?",
+      "Who needs to hear your testimony right now? How can you share it?",
+      "List the 5 most significant things God has done in your life."
+    ],
+    prayer: "Father, thank You. For every moment You carried me. For every prayer You answered in ways I didn't expect. For being faithful when I was faithless. I am a living testimony of Your love and power. Let my life be a song of praise and a beacon of hope to everyone around me. Amen.",
+    declaration: "My life is a testimony. What God has done for me is too great to keep silent. I will speak His goodness, I will live His faithfulness, and I will give thanks always.",
+    fasting: "Fast from silence about what God has done. Tell someone your testimony today."
+  },
+  21: {
+    title: "Dedication & Commissioning",
+    emoji: "👑",
+    verse: "Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit.",
+    verseRef: "Matthew 28:19–20",
+    theme: "This is not the end of the journey. This is your commissioning into a deeper walk with God.",
+    reflection: "You made it. Twenty-one days of seeking, surrendering, growing, and trusting. But this is not a finish line — it is a launching pad. The transformation that began here must continue to unfold in your everyday life. You are being sent out with new depth, new clarity, and new strength. The question is no longer 'Can I do this?' The question is: 'What will I do with who I have become?'",
+    prompts: [
+      "What is the most significant thing God revealed to you during this 21-day journey?",
+      "What specific commitments will you carry forward from this journey into your daily life?",
+      "Who can you take with you on the next journey? Who needs this companion?",
+      "Write a letter from your current self to your future self one year from today."
+    ],
+    prayer: "Lord, I am Yours. Take everything that has been developed in me during these 21 days and use it for Your glory. Send me out with clarity, courage, and compassion. Let me be a carrier of Your presence everywhere I go. I am commissioned — for my family, my community, and the world. Here I am. Send me. Amen.",
+    declaration: "I am fully dedicated to God's purposes. I am commissioned and sent. What began in 21 days will unfold over a lifetime. I go forward in faith, love, and power.",
+    fasting: "Commit to one ongoing spiritual habit you will carry beyond day 21."
+  }
+};
+
+/* ── Render day ─────────────────────────────────────── */
+function renderDay(num) {
+  const d    = DAY_DATA[num];
+  const prev = num > 1  ? `<a href="day.html?day=${num-1}" class="btn btn--outline" style="color:var(--purple);border-color:var(--purple)">← Day ${num-1}</a>` : '<span></span>';
+  const next = num < 21 ? `<a href="day.html?day=${num+1}" class="btn btn--primary">Day ${num+1} →</a>` : `<a href="journey.html" class="btn btn--primary">Complete Journey 🎉</a>`;
+
+  document.title = `Day ${num}: ${d.title} — Digital Prayer Companion`;
+
+  return `
+    <div class="day-hero">
+      <div class="container">
+        <span class="day-num-badge">Day ${num} of 21</span>
+        <h1>${d.emoji} ${d.title}</h1>
+        <p class="scripture-ref">${d.verseRef}</p>
+      </div>
+    </div>
+
+    <div class="day-content">
+      <p style="color:var(--gold);font-weight:700;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Today's Theme</p>
+      <p style="font-family:var(--font-serif);font-size:1.12rem;color:var(--purple);font-style:italic;line-height:1.7">${d.theme}</p>
+
+      <div class="scripture-block">
+        "${d.verse}"
+        <cite>— ${d.verseRef}</cite>
+      </div>
+
+      <div class="reflection-section">
+        <h3>Reflection</h3>
+        <p>${d.reflection}</p>
+      </div>
+
+      <div class="reflection-section">
+        <h3>Prayer Prompts</h3>
+        <ul class="prayer-prompts">
+          ${d.prompts.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="reflection-section">
+        <h3>📝 Your Journal</h3>
+        <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">This is your private space. Notes save automatically to your device only — never shared.</p>
+        <textarea class="journal-area" data-key="journal_day_${num}" placeholder="Write your thoughts, prayers, and reflections here…"></textarea>
+        <p class="journal-hint">🔒 Saved locally on your device only</p>
+      </div>
+
+      <div class="reflection-section">
+        <h3>Today's Prayer</h3>
+        <div class="scripture-block" style="font-style:normal;font-size:.98rem;line-height:1.8;color:#333">
+          ${d.prayer}
+        </div>
+      </div>
+
+      <div class="declaration-box">
+        <h4>🗣️ Speak This Declaration</h4>
+        <p>${d.declaration}</p>
+      </div>
+
+      ${d.fasting ? `
+      <div style="background:#fff8e8;border:1px solid rgba(201,151,58,.3);border-radius:var(--radius-sm);padding:1.25rem 1.5rem;margin:1.5rem 0">
+        <p style="font-size:.85rem;font-weight:700;color:var(--gold);margin-bottom:.3rem;letter-spacing:.05em;text-transform:uppercase">✦ Fasting Focus</p>
+        <p style="font-size:.95rem;color:#555">${d.fasting}</p>
+      </div>` : ''}
+
+      <button class="complete-btn" data-day="${num}">Mark Day ${num} Complete</button>
+
+      <div class="day-nav">
+        ${prev}
+        <button class="btn" style="background:none;color:var(--muted);border:1px solid rgba(0,0,0,.1)" onclick="shareDay(${num},'${d.title.replace(/'/g,"\\'")}')">
+          Share Day ${num} ↗
+        </button>
+        ${next}
+      </div>
+    </div>`;
+}
+
+const params  = new URLSearchParams(window.location.search);
+const dayNum  = Math.min(21, Math.max(1, parseInt(params.get('day')) || 1));
+const appEl   = document.getElementById('day-app');
+appEl.innerHTML = renderDay(dayNum);
+
+document.addEventListener('DOMContentLoaded', () => {
+  initJournal();
+  initCompleteBtn();
+  initMobileNav();
+});
+</script>
+</body>
+</html>
