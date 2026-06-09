@@ -7,6 +7,14 @@
   <meta name="description" content="Join a guided 3, 7, or 21-day prayer and fasting journey with daily scriptures, reflections, and private journaling." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🙏</text></svg>" />
+  <!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
 
@@ -40,6 +48,7 @@
     <div class="hero__actions">
       <a href="#fast-tracks" class="btn btn--primary btn--lg">Choose Your Fast Track</a>
       <a href="journey.html" class="btn btn--outline btn--lg">View 21-Day Journey</a>
+      <button class="btn btn--gold btn--lg" data-modal-open="calendar-modal">📅 Download Calendar Reminders</button>
     </div>
   </div>
   <div class="hero__scroll">Scroll</div>
@@ -206,7 +215,46 @@
   </div>
 </footer>
 
+<!-- ── Calendar Modal ── -->
+<div class="modal-overlay" id="calendar-modal">
+  <div class="modal">
+    <button class="modal__close" data-modal-close="calendar-modal" aria-label="Close">✕</button>
+    <div class="modal__icon">📅</div>
+    <h2 class="modal__title">Download Calendar Reminders</h2>
+    <p class="modal__desc">Get daily 6 AM prayer reminders added straight to your Google Calendar or Apple Calendar.</p>
+    <form id="calendar-form" class="cal-form" novalidate>
+      <div class="cal-form__row">
+        <label class="cal-form__label" for="cal-name">Your Name</label>
+        <input class="cal-form__input" id="cal-name" name="name" type="text" placeholder="e.g. Grace Johnson" required />
+      </div>
+      <div class="cal-form__row">
+        <label class="cal-form__label" for="cal-email">Email Address</label>
+        <input class="cal-form__input" id="cal-email" name="email" type="email" placeholder="your@email.com" required />
+      </div>
+      <div class="cal-form__row">
+        <label class="cal-form__label" for="cal-track">Fast Track</label>
+        <select class="cal-form__input" id="cal-track" name="track">
+          <option value="3">3-Day Reset</option>
+          <option value="7">7-Day Foundation Fast</option>
+          <option value="21" selected>21-Day Full Journey</option>
+        </select>
+      </div>
+      <div class="cal-form__row">
+        <label class="cal-form__label" for="cal-date">Start Date</label>
+        <input class="cal-form__input" id="cal-date" name="start_date" type="date" required />
+      </div>
+      <button type="submit" class="btn btn--primary btn--lg cal-submit-btn" style="width:100%;margin-top:.5rem">Download My Calendar</button>
+      <p class="cal-form__note">🔒 Your info is only used to personalise your calendar file. We never spam.</p>
+    </form>
+  </div>
+</div>
+
 <script src="app.js"></script>
+<script>
+// Set today as default start date
+const calDate = document.getElementById('cal-date');
+if (calDate) calDate.valueAsDate = new Date();
+</script>
 <script>
 const DAYS = [
   { num: 1,  title: "Surrender & Alignment",    emoji: "🤲" },

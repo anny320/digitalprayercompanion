@@ -707,6 +707,67 @@ tr:hover td { background: var(--purple-pale); }
   .track-card__days { font-size: 4rem; }
 }
 
+/* ── Gold button variant ────────────────────────────── */
+.btn--gold {
+  background: linear-gradient(135deg, var(--gold) 0%, #e8c57a 100%);
+  color: var(--purple);
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 14px rgba(201,151,58,.35);
+}
+.btn--gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,151,58,.45);
+  filter: brightness(1.05);
+}
+
+/* ── Modal ───────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(20,10,50,.65);
+  backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+  padding: 1.5rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  width: 100%; max-width: 480px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  animation: modalIn .25s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.92) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)  translateY(0); }
+}
+.modal__close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: var(--purple-pale); border: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  font-size: .95rem; cursor: pointer; color: var(--purple);
+  display: flex; align-items: center; justify-content: center;
+}
+.modal__close:hover { background: var(--purple); color: var(--white); }
+.modal__icon { font-size: 2.5rem; text-align: center; margin-bottom: .75rem; }
+.modal__title { text-align: center; font-size: 1.5rem; margin-bottom: .4rem; }
+.modal__desc { text-align: center; color: var(--text-muted); font-size: .92rem; margin-bottom: 1.5rem; }
+.cal-form__row { margin-bottom: 1rem; }
+.cal-form__label { display: block; font-size: .82rem; font-weight: 600; color: var(--purple); margin-bottom: .35rem; letter-spacing: .02em; }
+.cal-form__input {
+  width: 100%; padding: .7rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-family: var(--sans); font-size: .95rem; color: var(--text);
+  background: var(--cream);
+  transition: var(--transition);
+}
+.cal-form__input:focus { outline: none; border-color: var(--purple-mid); background: var(--white); box-shadow: 0 0 0 3px rgba(74,50,150,.12); }
+.cal-form__note { text-align: center; font-size: .78rem; color: var(--text-muted); margin-top: .75rem; }
+
 /* ── Utility ────────────────────────────────────────── */
 .text-center { text-align: center; }
 .mb-1 { margin-bottom: 1rem; }
