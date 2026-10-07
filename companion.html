@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Companion — Scripture for the Season You're In</title>
+  <meta name="description" content="A scripture-based daily companion: honest retellings of Bible stories, one real question, and space to journal — built for people navigating real seasons of life." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NB6XP5T39"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9NB6XP5T39');
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">🙏 Digital <span class="logo-dot">Prayer Companion</span></a>
+    <button class="nav__toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="companion.html">The Companion</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="companion-app"></div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__logo">📖 The Companion</div>
+    <ul class="footer__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="companion.html">The Companion</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <p class="footer__copy">Your journal is private — always. Notes save to your device only.</p>
+    <p class="footer__copy" style="font-size:.78rem;opacity:.6">&copy; <script>document.write(new Date().getFullYear())</script> <a href="https://wakaratech.com" target="_blank" rel="noopener" style="color:inherit">Wakara Technologies Limited</a></p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+/* ════════════════════════════════════════════════════════
+   THE COMPANION — content + renderer
+   Pattern mirrors day.html: inline data, render into #companion-app,
+   reuse app.js globals (loadData/saveData/showToast/trackEvent).
+   Default translation: NIV.
+   ════════════════════════════════════════════════════════ */
+
+/* Reset Gears seasons — order + display labels */
+const SEASONS = [
+  ['recovery',      'Recovery'],
+  ['stabilisation', 'Stabilisation'],
+  ['exploration',   'Exploration'],
+  ['execution',     'Execution'],
+  ['expansion',     'Expansion'],
+];
+
+const PLANS = {
+
+  /* ─────────────────────────── 1-DAY: COURAGE TO START ── */
+  courage1: {
+    id: 'courage1', length: 1, emoji: '🦁',
+    title: 'Courage to Start',
+    seed: 'David & Goliath',
+    blurb: 'One day. One giant. The nerve to pick up the first stone before you feel ready.',
+    days: {
+      1: {
+        emoji: '🦁',
+        title: 'The Giant and the Five Stones',
+        ref: '1 Samuel 17',
+        story: "For forty days the same thing happened every morning. A giant walked out, shouted across the valley, and an entire army decided again that today was not the day. Fear had become a routine. Then a teenager arrived — not a soldier, just a younger brother carrying bread and cheese to the front line. He heard the giant and asked the obvious question nobody else was asking anymore: why is everyone just standing here? They dressed him in the king's armour. It didn't fit, so he took it off. He went to a stream, chose five smooth stones, and walked toward the thing everyone else had agreed to be afraid of. One stone. One throw. Forty days of paralysis ended in about forty seconds.",
+        lesson: "The battle wasn't lost on the day David arrived — it was lost forty days earlier, the first morning the army let the giant set the terms. Courage here isn't the absence of a giant; it's refusing to let the giant run the clock. And notice what David took off: the borrowed armour. He didn't win with someone else's method. He won with the stream, the sling, and the thing he already knew how to do.",
+        application: "What have you been quietly filing under \"impossible\" that is actually just \"unfamiliar\" — and what is the one small stone you could pick up today?",
+        verses: [
+          { text: "David said to the Philistine, \"You come against me with sword and spear and javelin, but I come against you in the name of the Lord Almighty.\"", ref: "1 Samuel 17:45 (NIV)" }
+        ],
+        plain: "David basically said: you've got all the gear and the size advantage — but you've misjudged what this fight is actually about.",
+        gear: {
+          recovery:      "You don't have to feel strong to start. David wasn't a trained soldier — he just refused to keep standing still.",
+          stabilisation: "Go to the stream first. Gather the few steady, to-hand things you already trust before you face the loud thing.",
+          exploration:   "Take off the borrowed armour. Someone else's method may not fit you — test your own before the moment of truth.",
+          execution:     "Five stones, one throw. You don't need a perfect plan, just the first real action taken before the nerve fades.",
+          expansion:     "David's one yes moved a whole army off the hillside. Your courage quietly gives permission to everyone watching.",
+        },
+        prompt: "Name your giant plainly — the thing you've been walking past for days or weeks. How long have you actually been standing in the valley staring at it? Now describe the first stone: the smallest honest action you could take in the next 24 hours.",
+        commitments: [
+          "Name the giant out loud to one person I trust today.",
+          "Pick up the first stone — one 15-minute action toward it before I sleep.",
+          "Take off one piece of 'borrowed armour' — a method that isn't mine — and do it my way instead.",
+        ],
+      }
+    }
+  },
+
+  /* ─────────────────────── 7-DAY: REST & RESTORATION ──── */
+  rest7: {
+    id: 'rest7', length: 7, emoji: '🌿',
+    title: 'Rest & Restoration',
+    seed: 'Elijah · Psalm 23 · The Prodigal Son',
+    blurb: 'Seven days to stop proving, stop running, and learn how to actually rest — not as a reward, but as a design.',
+    days: {
+      1: {
+        emoji: '🌳',
+        title: "The Man Who Asked to Die",
+        ref: '1 Kings 19',
+        story: "Elijah had just pulled off the biggest win of his life — fire from heaven, the whole nation watching. You'd expect him flying high. Instead, one threatening message sends him running a full day into the desert. He collapses under a lone broom tree and, for the first time, asks God to just let him die. He's done. And here's what God does not do: no lecture, no \"pull yourself together,\" no reminder of yesterday's victory. An angel wakes him — not to talk, but to feed him. Bread and water. Then: sleep again. Then food again. Only after he has slept and eaten twice does the conversation begin, and even then it's gentle: \"the journey is too much for you.\"",
+        lesson: "Burnout often shows up right after the big win, not the big failure — the crash comes when the adrenaline leaves. And God's first response to a wrung-out person wasn't correction; it was a nap and a meal. Sometimes the most spiritual thing you can do is sleep and eat. Rest isn't you failing at faith. Sometimes it's the most faithful thing available to you.",
+        application: "When did you last let yourself rest without earning it first — and what would it cost you to do that this week?",
+        verses: [
+          { text: "All at once an angel touched him and said, \"Get up and eat.\" ... \"Get up and eat, for the journey is too much for you.\"", ref: "1 Kings 19:5,7 (NIV)" }
+        ],
+        plain: "God didn't say 'try harder.' He said: eat something, sleep, the road is genuinely too much right now — and that's okay.",
+        gear: {
+          recovery:      "This is your day. Heaven's prescription for exhaustion was bread, water, and sleep — in that order, before any talking.",
+          stabilisation: "Notice the pattern: eat, rest, eat, rest, then the conversation. Rebuild the basics before you try to make big decisions.",
+          exploration:   "You can't hear the 'gentle whisper' that comes later in this chapter while you're still running. Stop first, listen second.",
+          execution:     "Even in a push season, two meals and real sleep aren't optional extras — they're the fuel the push runs on.",
+          expansion:     "Elijah thought he was finished. God was actually recommissioning him. Rest is often the setup for what's next, not the end.",
+        },
+        prompt: "Where are you running right now — and what are you running from? Be honest about how tired you actually are. What would 'bread, water, and sleep' look like for you this week, practically?",
+        commitments: [
+          "Go to bed 45 minutes earlier tonight — no screen in the last 15.",
+          "Eat one unhurried meal today without my phone in my hand.",
+          "Say no to one thing this week that I'd normally say yes to out of guilt.",
+        ],
+      },
+      2: {
+        emoji: '🐑',
+        title: "The Shepherd Who Makes You Lie Down",
+        ref: 'Psalm 23',
+        story: "It's the most quoted poem in the world, and we've heard it so often we've stopped hearing it. But read it as a shepherd's working day. Green pastures. Still water. The dark valley. A table. Here's the detail we skip: a sheep will not lie down when it's anxious, hungry, or sensing a threat. It stays on its feet, alert, exhausted. So the shepherd's whole job is to remove the fear, the hunger, the danger — until the sheep can finally rest. That's why the line reads 'he makes me lie down.' Not suggests. Makes. Because the sheep, left to itself, never would.",
+        lesson: "Rest, in Psalm 23, is engineered by the shepherd, not willed by the sheep. You don't rest by gritting your teeth harder about resting. You rest when you trust someone else is keeping watch. 'He restores my soul' is the whole point of the lying down — restoration happens in the stopping, not the striving.",
+        application: "What would it actually take for you to lie down — and who, or what, are you trusting to keep watch while you do?",
+        verses: [
+          { text: "The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul.", ref: "Psalm 23:1–3 (NIV)" }
+        ],
+        plain: "I'm looked after, so I'm not running on empty. I'm made to stop in a safe place and drink from calm water — and that's where I get put back together.",
+        gear: {
+          recovery:      "You are the sheep being made to lie down. Let yourself be led to still water instead of forcing your own pace.",
+          stabilisation: "Green pastures and quiet water are the stable inputs. Build a few of them into your week on purpose.",
+          exploration:   "'He leads' — you don't have to see the whole route to take the next step beside the water.",
+          execution:     "Even the valley is walked 'through,' not camped in. Keep moving, but at the shepherd's pace, not panic's.",
+          expansion:     "The table is set 'in the presence of my enemies.' Rest and provision can coexist with pressure — they don't wait for it to clear.",
+        },
+        prompt: "Where is your 'green pasture' — the place or practice that genuinely refreshes you? When did you last go there? What's the fear or hunger keeping you on your feet when you could lie down?",
+        commitments: [
+          "Block 30 minutes this week in my 'green pasture' and defend it like a meeting.",
+          "Name one worry I'm carrying and deliberately hand it over for today.",
+          "Drink the still water: 10 minutes of quiet with no input — no music, no feed.",
+        ],
+      },
+      3: {
+        emoji: '🫖',
+        title: "The One Thing",
+        ref: 'Luke 10:38–42',
+        story: "Jesus comes to stay, and two sisters respond in completely different ways. Martha goes into overdrive — hosting, cooking, arranging, the whole production. Mary just sits down on the floor near Jesus and listens. Martha, up to her elbows and increasingly resentful, finally snaps: \"Don't you care that she's left me to do all this? Tell her to help me!\" You can feel it — the busyness curdling into bitterness. And Jesus, kindly, doesn't take the bait. \"Martha, Martha — you are worried and upset about many things, but few things are needed, or indeed only one. Mary has chosen what is better.\"",
+        lesson: "Busyness can look exactly like devotion from the outside — Martha was serving Jesus, after all. But activity isn't the same as attention. The tell is the resentment: when serving leaves you bitter, it's often because you've buried the one thing under the many things. Rest sometimes means letting the lesser things wait while you choose the better thing on purpose.",
+        application: "What are the 'many things' crowding your week right now — and what is the one thing that actually matters that you keep postponing?",
+        verses: [
+          { text: "\"Martha, Martha,\" the Lord answered, \"you are worried and upset about many things, but few things are needed — or indeed only one.\"", ref: "Luke 10:41–42 (NIV)" }
+        ],
+        plain: "You're spinning over a hundred things. Almost none of them are the point. One is.",
+        gear: {
+          recovery:      "If serving has turned to resentment, that's your signal to sit down before you do more — not push through.",
+          stabilisation: "Sort the 'many things' into what's truly needed and what's just noise. Stability starts with that honest list.",
+          exploration:   "Mary 'chose.' Rest can be an active choice about where your attention goes, not just the absence of tasks.",
+          execution:     "In a delivery season, protect the one thing. Everything else is negotiable; the main thing can't become the maybe thing.",
+          expansion:     "More capacity without more focus just scales the busyness. Expand the one thing, not the hundred.",
+        },
+        prompt: "List the 'many things' you're worried and upset about this week — get them all out. Now circle the one. What would it look like to put the one first tomorrow, before the hundred?",
+        commitments: [
+          "Write tomorrow's 'one thing' tonight and do it before I open any inbox.",
+          "Drop or delegate one task from the 'many things' list this week.",
+          "Sit for five unproductive minutes — no output expected — and just pay attention.",
+        ],
+      },
+      4: {
+        emoji: '🕊️',
+        title: "The Day God Stopped",
+        ref: 'Genesis 2 · Exodus 20',
+        story: "At the very start of everything, the pattern is set. Six days of making — light, sea, sky, creatures, people. Then, on the seventh, something strange: God stops. Not because He's tired — nothing tires the One who spoke galaxies into being. He stops to make a rhythm, and He blesses that day and sets it apart. Later, in the desert, His people learn the same lesson through bread. Every morning, manna. Gather enough for the day. On the sixth day, gather double — because tomorrow, you rest, and it'll keep. The ones who tried to hoard extra on the other days watched it rot. The ones who refused to rest on the seventh went out and found nothing.",
+        lesson: "Rest isn't a reward for finishing the work — it's woven into the design of reality itself, built in before anyone had earned a thing. And the manna was a weekly lesson in trust: God provides for the day you stop. Taking a real break is, quietly, an act of faith that the world will keep turning without your hands on it for a while.",
+        application: "If you built one fixed stopping point into your week, what would you have to trust God to handle while you're not working?",
+        verses: [
+          { text: "By the seventh day God had finished the work he had been doing; so on the seventh day he rested from all his work.", ref: "Genesis 2:2 (NIV)" }
+        ],
+        plain: "Even God built a full stop into the week — on purpose, as a blessing, not because He'd run out of energy.",
+        gear: {
+          recovery:      "Permission, in writing, from page two of the Bible: stopping is holy, not lazy. Take the day.",
+          stabilisation: "A fixed weekly stop is the single most stabilising rhythm you can set. Pick the day and protect it.",
+          exploration:   "The manna taught trust one day at a time. You can experiment with stopping before you've figured out the whole system.",
+          execution:     "'Gather double on the sixth' — plan ahead so the rest day holds. Rest is scheduled, not stumbled into.",
+          expansion:     "Hoarding rotted; trusting held. Growth that never stops isn't growth, it's just accumulation that spoils.",
+        },
+        prompt: "What's your relationship with stopping — do you treat rest as earned or as given? Describe one fixed 'stop' you could build into your week. What comes up in you when you imagine not working during it?",
+        commitments: [
+          "Choose one half-day this week as a fixed stop and put it in the calendar now.",
+          "Prepare on the 'sixth day' — get one thing done early so the stop can hold.",
+          "Notice the urge to 'just check one thing' during the stop — and let it pass.",
+        ],
+      },
+      5: {
+        emoji: '🪢',
+        title: "Come to Me",
+        ref: 'Matthew 11:28–30',
+        story: "Jesus is talking to ordinary, worn-out people — not slackers, but folks weighed down by a religion of endless requirements and a life of endless demands. And He makes one of the most human offers in the whole Bible: \"Come to me, all you who are weary and burdened, and I will give you rest.\" Then He reaches for a farming image everyone in the crowd would know. A yoke — the wooden beam across two oxen so they pull together. \"Take my yoke... for my yoke is easy and my burden is light.\" A good yoke was custom-carved to fit the animal's shoulders so it didn't chafe. His point: stop pulling alone under a load that doesn't fit. Get in the fitted yoke, and learn to pull alongside me.",
+        lesson: "The invitation isn't 'try harder' — it's 'come and exchange.' Weariness often comes from carrying a load we were never meant to carry alone, under a yoke someone else strapped on us. 'Easy' here doesn't mean no work; it means well-fitted — matched to you, shared, carried in step with Someone stronger.",
+        application: "What burden are you carrying right now that you were never actually meant to carry alone?",
+        verses: [
+          { text: "\"Come to me, all you who are weary and burdened, and I will give you rest. Take my yoke upon you and learn from me... For my yoke is easy and my burden is light.\"", ref: "Matthew 11:28–30 (NIV)" }
+        ],
+        plain: "Worn out? Come here. Swap the load that's crushing you for one that actually fits, and stop pulling it on your own.",
+        gear: {
+          recovery:      "Start with the first word: come. Before fixing anything, just bring the tiredness here and set it down.",
+          stabilisation: "A fitted yoke doesn't chafe. Check which loads are yours to carry and which were strapped on by someone else.",
+          exploration:   "'Learn from me.' Rest can be a season of relearning your pace, not just pausing the old one.",
+          execution:     "Pulling in a yoke still means pulling — but in step, and not solo. Find the person you're meant to pull alongside.",
+          expansion:     "You can carry more when the load is shared and fitted. Scale the partnership, not the strain.",
+        },
+        prompt: "Name the heaviest thing you're carrying this season. Is it genuinely yours — or did someone hand it to you, or did you pick it up out of habit? What would 'coming' and setting it down actually look like this week?",
+        commitments: [
+          "Hand off or ask for help with one burden I've been carrying solo.",
+          "Identify one 'yoke' that was strapped on me by someone else — and question whether I keep it.",
+          "Start one day this week with two minutes of simply 'coming' — before the to-do list.",
+        ],
+      },
+      6: {
+        emoji: '🏃',
+        title: "The Long Way Home",
+        ref: 'Luke 15:11–24',
+        story: "A younger son asks for his inheritance early — which is essentially telling his father, 'I wish you were dead.' He takes the money, goes far away, and burns through all of it. When a famine hits, he ends up feeding pigs, hungry enough to envy their food. That's where it turns. He rehearses a speech: 'Father, I've sinned, I'm not worthy to be called your son, just make me a hired servant.' A careful, earn-my-way-back speech. He heads home braced for the cold reception he deserves. But while he's still a long way off, his father sees him — which means the father had been watching the road — and runs. In that culture, dignified older men did not run. The father runs anyway, throws his arms around him, and the son doesn't even get to finish the speech before there's a robe, a ring, and a feast.",
+        lesson: "Restoration here is not earned back. The son had a whole repayment plan ready, and the father interrupted it with a hug. So much of our exhaustion is the effort of proving ourselves back into worthiness — to people, to God, to ourselves. This story says the welcome was already running toward you before you got your speech out. Rest includes stopping the long, grinding work of earning your way home.",
+        application: "Where have you been trying to earn your way back to something — and what if the welcome is already on its way to you?",
+        verses: [
+          { text: "But while he was still a long way off, his father saw him and was filled with compassion for him; he ran to his son, threw his arms around him and kissed him.", ref: "Luke 15:20 (NIV)" }
+        ],
+        plain: "He was still far down the road, mid-apology in his head, when his dad spotted him and sprinted to him — no lecture, just arms open.",
+        gear: {
+          recovery:      "You don't have to arrive fixed. The father ran to the son mid-mess, 'still a long way off.' Come as you are.",
+          stabilisation: "The robe, ring, and feast re-established his place. Let yourself be re-rooted in belonging before performance.",
+          exploration:   "'He came to his senses.' Honest reflection about where you've wandered is the first step home — not the last.",
+          execution:     "Drop the repayment plan. Striving to earn back what's freely given just burns energy you need elsewhere.",
+          expansion:     "The feast was for the whole house. Being welcomed home frees you to welcome others instead of guarding your worth.",
+        },
+        prompt: "Where in your life are you running a 'repayment plan' — trying to earn back approval, trust, or a sense of worth? Who or what are you trying to earn it from? Write the sentence you'd most want to hear from them — and sit with the idea that grace might get there first.",
+        commitments: [
+          "Stop one 'proving' behaviour this week — the thing I do just to earn approval.",
+          "Receive one good thing today without immediately trying to repay it.",
+          "Take one step 'home' — a message, a return, a reconciliation I've been putting off.",
+        ],
+      },
+      7: {
+        emoji: '🌅',
+        title: "He Restores My Soul",
+        ref: 'Psalm 23:4–6',
+        story: "We end where we started the week — back with the shepherd, but further down the road. By now the sheep has been through it: the valley, the shadows, the pressure. And the song doesn't pretend otherwise. 'Even though I walk through the darkest valley, I will fear no evil, for you are with me.' Notice — through. Not around, not instead of. The valley still gets walked. But there's a table set right in the middle of the pressure, a cup filled past the brim, and a promise that follows the sheep like a second flock: goodness and mercy, all the days, all the way home. The week's work wasn't to escape the hard road. It was to learn Who's walking it with you.",
+        lesson: "Rest, it turns out, isn't a break from your life — it's a different way of carrying it. 'He restores my soul' isn't a one-time top-up; it's the ongoing work of a God who walks the valley with you and keeps the cup overflowing. You won't always get the easy road. But you can stop walking it alone, braced and depleted, and start walking it restored.",
+        application: "After this week — what's the real difference, for you, between stopping and resting? And what's one rhythm you'll keep?",
+        verses: [
+          { text: "Surely your goodness and love will follow me all the days of my life, and I will dwell in the house of the Lord forever.", ref: "Psalm 23:6 (NIV)" }
+        ],
+        plain: "Good things and steady kindness aren't just ahead of me — they're trailing me the whole way. I'm not a visitor to that; it's home.",
+        gear: {
+          recovery:      "Restoration is ongoing, not a finish line. Let 'he restores my soul' be a daily return, not a one-off repair.",
+          stabilisation: "'Goodness and mercy follow me all the days' — build your rhythm on what's constant, not on how you feel today.",
+          exploration:   "The valley gets walked 'through.' Keep moving into what's next, carrying the rest you found here.",
+          execution:     "The overflowing cup sits 'in the presence of enemies' — you can execute under pressure from a place of fullness, not fumes.",
+          expansion:     "A restored soul has something to pour out. What you received this week, you're now carrying for others.",
+        },
+        prompt: "Look back over the week — Elijah, the shepherd, the one thing, the day God stopped, the fitted yoke, the long way home. Which day met you most? What did this week teach you about the difference between merely stopping and actually being restored? Name the one rhythm you're keeping.",
+        commitments: [
+          "Keep the one rest rhythm from this week — written down, starting now.",
+          "Tell one person what this week shifted in me.",
+          "Set a reminder to return to my favourite day in two weeks and journal again.",
+        ],
+      },
+    }
+  },
+
+};
+
+/* Plans shown as 'coming soon' on the picker (from the roadmap) */
+const SOON = [
+  { len: 3,   title: 'Courage to Start',        seed: 'David · Esther · Moses' },
+  { len: 21,  title: 'Clarity in the Wilderness', seed: "Daniel's fast · Joseph" },
+  { len: 30,  title: 'Identity Under Pressure',  seed: 'Job · Paul · Ruth' },
+  { len: 90,  title: 'Building Something Lasting', seed: 'Nehemiah · Acts · Proverbs' },
+  { len: 365, title: 'The Whole Arc',             seed: 'Genesis to Revelation' },
+];
+
+/* ── Storage (namespaced under the shared dpc_v1 store) ── */
+const doneKey  = (plan, n)      => `companion_${plan}_done_${n}`;
+const signKey  = (plan, n)      => `companion_${plan}_sign_${n}`;
+const commKey  = (plan, n, i)   => `companion_${plan}_commit_${n}_${i}`;
+const jrnlKey  = (plan, n)      => `companion_${plan}_journal_${n}`;
+
+function doneCount(plan) {
+  const d = loadData(); const p = PLANS[plan]; let c = 0;
+  for (let i = 1; i <= p.length; i++) if (d[doneKey(plan, i)]) c++;
+  return c;
+}
+
+/* ── WhatsApp share ─────────────────────────────────────── */
+function shareWhatsApp(text) {
+  const url = window.location.href.split('#')[0];
+  const msg = encodeURIComponent(`${text}\n${url}`);
+  window.open(`https://wa.me/?text=${msg}`, '_blank', 'noopener');
+  trackEvent('companion_share', { channel: 'whatsapp' });
+}
+window.shareWhatsApp = shareWhatsApp;
+
+/* ════════════ VIEW: plan picker ════════════ */
+function renderPicker() {
+  document.title = "The Companion — Scripture for the Season You're In";
+  const live = Object.values(PLANS).map(p => {
+    const done = doneCount(p.id);
+    const cta  = done > 0 ? `Continue · ${done}/${p.length} done` : (p.length === 1 ? 'Begin →' : 'Start the plan →');
+    return `
+      <a class="c-plan-card" href="companion.html?plan=${p.id}">
+        <div class="c-plan-card__len">${p.length}<small>${p.length === 1 ? 'Day' : 'Days'}</small></div>
+        <div class="c-plan-card__seed">${p.seed}</div>
+        <div class="c-plan-card__title">${p.emoji} ${p.title}</div>
+        <div class="c-plan-card__desc">${p.blurb}</div>
+        <div class="c-plan-card__cta">${cta}</div>
+      </a>`;
+  }).join('');
+
+  const soon = SOON.map(s => `
+    <div class="c-plan-card soon">
+      <div class="c-plan-card__len">${s.len}<small>Days</small></div>
+      <div class="c-plan-card__seed">${s.seed}</div>
+      <div class="c-plan-card__title">${s.title}</div>
+      <div class="c-plan-card__desc">Full plan in progress.</div>
+    </div>`).join('');
+
+  return `
+    <div class="day-hero">
+      <div class="container day-hero__content">
+        <span class="day-num-badge">The Companion</span>
+        <h1>📖 Scripture for the Season You're In</h1>
+        <p class="scripture-ref">Honest retellings · one real question · space to journal</p>
+      </div>
+    </div>
+    <div class="c-planwrap">
+      <div class="section-header fade-up" style="text-align:center;max-width:640px;margin:0 auto 2.5rem">
+        <p style="color:var(--text-muted);line-height:1.8">Not a reading plan to get through — a companion for where you actually are. Each day gives you a story told like a human story, what was really going on beneath it, one honest question, a verse in plain language, and a private space to write. Pick a length that fits your season.</p>
+      </div>
+      <div class="c-plan-grid fade-up">${live}${soon}</div>
+      <p class="journal-hint" style="text-align:center;margin-top:2rem">🔒 Everything you write stays on your device. No account, no sign-up, nothing shared.</p>
+    </div>`;
+}
+
+/* ════════════ VIEW: plan overview ════════════ */
+function renderOverview(plan) {
+  const p = PLANS[plan];
+  document.title = `${p.title} — The Companion`;
+  const d = loadData();
+  const done = doneCount(plan);
+  const pct  = Math.round((done / p.length) * 100);
+
+  let nextDay = 1;
+  for (let i = 1; i <= p.length; i++) if (d[doneKey(plan, i)]) nextDay = Math.min(p.length, i + 1);
+
+  const cards = Object.keys(p.days).map(n => {
+    const day = p.days[n];
+    const isDone = d[doneKey(plan, n)];
+    return `
+      <a class="c-day-card${isDone ? ' done' : ''}" href="companion.html?plan=${plan}&day=${n}">
+        <div class="c-day-card__num">${isDone ? '✓' : n}</div>
+        <div>
+          <div class="c-day-card__title">${day.emoji} ${day.title}</div>
+          <div class="c-day-card__sub">Day ${n} · ${day.ref}</div>
+        </div>
+      </a>`;
+  }).join('');
+
+  const startLabel = done === 0 ? 'Begin Day 1' : (done >= p.length ? 'Revisit the plan' : `Continue · Day ${nextDay}`);
+
+  return `
+    <div class="day-hero">
+      <div class="container day-hero__content">
+        <span class="day-num-badge">${p.length}-Day Plan</span>
+        <h1>${p.emoji} ${p.title}</h1>
+        <p class="scripture-ref">${p.seed}</p>
+      </div>
+    </div>
+    <div class="day-content">
+      <p style="font-family:var(--serif);font-size:1.12rem;color:var(--purple);font-style:italic;line-height:1.7">${p.blurb}</p>
+
+      <div class="c-progress-wrap">
+        <div class="c-progress-label"><span>Your progress</span><span>${done} / ${p.length}</span></div>
+        <div class="c-progress-bar"><div class="c-progress-fill" style="width:${pct}%"></div></div>
+      </div>
+
+      <a href="companion.html?plan=${plan}&day=${done >= p.length ? 1 : nextDay}" class="c-complete-btn" style="text-decoration:none;text-align:center">${startLabel}</a>
+
+      <div class="c-section">
+        <h3>The Days</h3>
+        <div class="c-day-grid">${cards}</div>
+      </div>
+
+      <div class="c-day-nav">
+        <a href="companion.html" class="btn btn--outline" style="color:var(--purple);border-color:var(--purple)">← All plans</a>
+        <span></span>
+      </div>
+    </div>`;
+}
+
+/* ════════════ VIEW: a single day ════════════ */
+function renderDayView(plan, n) {
+  const p = PLANS[plan];
+  const day = p.days[n];
+  if (!day) { return renderOverview(plan); }
+  document.title = `Day ${n}: ${day.title} — ${p.title}`;
+  const d = loadData();
+
+  const prev = n > 1
+    ? `<a href="companion.html?plan=${plan}&day=${n-1}" class="btn btn--outline" style="color:var(--purple);border-color:var(--purple)">← Day ${n-1}</a>`
+    : `<a href="companion.html?plan=${plan}" class="btn btn--outline" style="color:var(--purple);border-color:var(--purple)">← Overview</a>`;
+  const next = n < p.length
+    ? `<a href="companion.html?plan=${plan}&day=${n+1}" class="btn btn--primary">Day ${n+1} →</a>`
+    : `<a href="companion.html?plan=${plan}" class="btn btn--primary">Finish →</a>`;
+
+  const verses = day.verses.map(v => `"${v.text}"<cite>— ${v.ref}</cite>`).join('<br><br>');
+  const gear = SEASONS.map(([k, label]) => `
+    <div class="c-gear-item">
+      <div class="c-gear-item__label">${label}</div>
+      <p>${day.gear[k]}</p>
+    </div>`).join('');
+
+  const sign = d[signKey(plan, n)] || {};
+  const commits = day.commitments.map((c, i) => {
+    const on = d[commKey(plan, n, i)];
+    return `
+      <li class="c-commit-item${on ? ' checked' : ''}" data-ci="${i}">
+        <input type="checkbox" ${on ? 'checked' : ''} />
+        <span>${c}</span>
+      </li>`;
+  }).join('');
+
+  const isDone = d[doneKey(plan, n)];
+
+  return `
+    <div class="day-hero">
+      <div class="container day-hero__content">
+        <span class="day-num-badge">Day ${n} of ${p.length}</span>
+        <h1>${day.emoji} ${day.title}</h1>
+        <p class="scripture-ref">${day.ref} · ${p.title}</p>
+      </div>
+    </div>
+
+    <div class="day-content">
+
+      <div class="c-section">
+        <div class="c-section__eyebrow">The Story</div>
+        <h3>${day.title}</h3>
+        <p>${day.story}</p>
+      </div>
+
+      <div class="c-section">
+        <div class="c-section__eyebrow">The Lesson</div>
+        <h3>What was really happening</h3>
+        <p>${day.lesson}</p>
+      </div>
+
+      <div class="c-section">
+        <div class="c-section__eyebrow">The Application</div>
+        <h3>One honest question</h3>
+        <div class="c-application"><p>${day.application}</p></div>
+      </div>
+
+      <div class="c-section">
+        <div class="c-section__eyebrow">The Verse</div>
+        <h3>Hold onto this</h3>
+        <div class="scripture-block">${verses}</div>
+        <div class="c-plain"><strong>In plain words:</strong> ${day.plain}</div>
+      </div>
+
+      <div class="c-section">
+        <div class="c-section__eyebrow">The Gear Link</div>
+        <h3>Wherever you are in your season</h3>
+        <div class="c-gear-list">${gear}</div>
+      </div>
+
+      <div class="c-section">
+        <div class="c-section__eyebrow">Journal</div>
+        <h3>📝 Your private space</h3>
+        <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:.5rem">${day.prompt}</p>
+        <textarea class="journal-area" data-key="${jrnlKey(plan, n)}" placeholder="Write freely — no one sees this but you…"></textarea>
+        <p class="journal-hint">🔒 Saved locally on your device only</p>
+
+        <h4 style="margin:1.75rem 0 .5rem;color:var(--purple)">This week's micro-commitments</h4>
+        <ul class="c-commit-list">${commits}</ul>
+
+        <div class="c-sign-row">
+          <div class="c-sign-field">
+            <label for="c-sign-name">Signed</label>
+            <input id="c-sign-name" class="c-sign-name" type="text" placeholder="Your name" value="${(sign.name || '').replace(/"/g, '&quot;')}" />
+          </div>
+          <div class="c-sign-field">
+            <label for="c-sign-date">Date</label>
+            <input id="c-sign-date" type="date" value="${sign.date || ''}" />
+          </div>
+        </div>
+      </div>
+
+      <button class="c-complete-btn${isDone ? ' done' : ''}" data-plan="${plan}" data-day="${n}">${isDone ? '✔ Day Completed' : `Mark Day ${n} Complete`}</button>
+
+      <div id="c-summary-slot"></div>
+
+      <div class="c-day-nav">
+        ${prev}
+        <button class="btn btn--whatsapp" onclick="shareWhatsApp('Day ${n}: ${day.title.replace(/'/g, "\\'")} — The Companion (${p.title})')">Share on WhatsApp</button>
+        ${next}
+      </div>
+    </div>`;
+}
+
+/* ── Summary card (plan complete) ── */
+function summaryCard(plan) {
+  const p = PLANS[plan];
+  return `
+    <div class="c-summary fade-up visible">
+      <div class="ornament" style="color:var(--gold-light)">✦ ✦ ✦</div>
+      <h2>You finished ${p.title}</h2>
+      <div class="c-summary__stat">${p.length}/${p.length}</div>
+      <p>${p.length === 1 ? 'One day, one honest step.' : `${p.length} days of showing up for yourself.`} Whatever you wrote is still here, and still yours.</p>
+      <button class="btn btn--whatsapp" onclick="shareWhatsApp('I just finished the ${p.length}-day &quot;${p.title}&quot; plan on The Companion.')">Share your milestone</button>
+    </div>`;
+}
+
+/* ── Bind day-view interactions after render ── */
+function bindDayView(plan, n) {
+  // micro-commitments
+  document.querySelectorAll('.c-commit-item').forEach(li => {
+    const i = li.dataset.ci;
+    const box = li.querySelector('input');
+    li.addEventListener('click', (e) => {
+      if (e.target !== box) box.checked = !box.checked;
+      const data = loadData(); data[commKey(plan, n, i)] = box.checked; saveData(data);
+      li.classList.toggle('checked', box.checked);
+    });
+  });
+
+  // signed name + date (auto-save)
+  const nameEl = document.getElementById('c-sign-name');
+  const dateEl = document.getElementById('c-sign-date');
+  function saveSign() {
+    const data = loadData();
+    data[signKey(plan, n)] = { name: nameEl.value.trim(), date: dateEl.value };
+    saveData(data);
+  }
+  if (nameEl) nameEl.addEventListener('input', saveSign);
+  if (dateEl) dateEl.addEventListener('change', saveSign);
+
+  // completion
+  const btn = document.querySelector('.c-complete-btn[data-day]');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      // stamp the signature date if left blank, then persist name + date
+      if (dateEl && !dateEl.value) dateEl.valueAsDate = new Date();
+      saveSign();
+      const data = loadData(); // reload so the just-saved signature isn't clobbered
+      data[doneKey(plan, n)] = true;
+      saveData(data);
+      btn.textContent = '✔ Day Completed';
+      btn.classList.add('done');
+      showToast(`Day ${n} complete. Keep going 🌿`, 'success');
+      trackEvent('companion_day_completed', { plan, day: n });
+      if (doneCount(plan) >= PLANS[plan].length) {
+        document.getElementById('c-summary-slot').innerHTML = summaryCard(plan);
+        document.getElementById('c-summary-slot').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
+
+  // if the plan was already finished, show the summary on load
+  if (doneCount(plan) >= PLANS[plan].length) {
+    const slot = document.getElementById('c-summary-slot');
+    if (slot) slot.innerHTML = summaryCard(plan);
+  }
+}
+
+/* ── Router ── */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const plan = params.get('plan');
+  const app  = document.getElementById('companion-app');
+
+  if (!plan || !PLANS[plan]) {
+    app.innerHTML = renderPicker();
+    trackEvent('companion_view', { view: 'picker' });
+    return;
+  }
+
+  const dayParam = params.get('day');
+  if (dayParam == null) {
+    app.innerHTML = renderOverview(plan);
+    trackEvent('companion_view', { view: 'overview', plan });
+    return;
+  }
+
+  const n = Math.min(PLANS[plan].length, Math.max(1, parseInt(dayParam) || 1));
+  app.innerHTML = renderDayView(plan, n);
+  bindDayView(plan, n);
+  trackEvent('companion_view', { view: 'day', plan, day: n });
+})();
+</script>
+</body>
+</html>

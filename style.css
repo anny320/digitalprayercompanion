@@ -777,3 +777,166 @@ tr:hover td { background: var(--purple-pale); }
 .mt-2 { margin-top: 2rem; }
 .mt-3 { margin-top: 3rem; }
 .lead { font-size: 1.08rem; color: var(--text-muted); }
+
+/* ════════════════════════════════════════════════════════
+   THE COMPANION — scripture-based daily companion
+   Isolated class names (prefix c-) so the shared 21-day
+   progress/complete logic in app.js never touches these.
+   ════════════════════════════════════════════════════════ */
+
+/* ── Plan picker ───────────────────────────────────────── */
+.c-planwrap { max-width: 1120px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+.c-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.c-plan-card {
+  background: var(--white);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: .4rem;
+  text-decoration: none; color: inherit;
+  transition: var(--transition); position: relative; overflow: hidden;
+}
+.c-plan-card:hover {
+  border-color: var(--gold); transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(201,151,58,.18);
+}
+.c-plan-card__len {
+  font-family: var(--serif); font-size: 2.6rem; font-weight: 900;
+  color: var(--purple); line-height: 1;
+}
+.c-plan-card__len small { font-size: .9rem; font-weight: 600; color: var(--gold); display: block; letter-spacing: .04em; text-transform: uppercase; margin-top: .25rem; }
+.c-plan-card__title { font-family: var(--serif); font-size: 1.2rem; color: var(--purple); margin-top: .5rem; }
+.c-plan-card__seed { font-size: .78rem; color: var(--gold); font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.c-plan-card__desc { font-size: .92rem; color: var(--text-muted); line-height: 1.7; margin-top: .25rem; }
+.c-plan-card__cta { margin-top: auto; padding-top: 1rem; font-weight: 700; font-size: .9rem; color: var(--purple); }
+.c-plan-card.soon { opacity: .6; pointer-events: none; }
+.c-plan-card.soon::after {
+  content: 'Coming soon'; position: absolute; top: .9rem; right: -2.4rem;
+  background: var(--purple-light); color: #fff; font-size: .62rem; font-weight: 800;
+  letter-spacing: .08em; text-transform: uppercase; padding: .2rem 2.5rem;
+  transform: rotate(35deg);
+}
+
+/* ── Companion day cards (overview) ───────────────────── */
+.c-day-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem;
+}
+.c-day-card {
+  background: var(--white); border-radius: var(--radius-sm); padding: 1.1rem 1rem;
+  box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: .75rem;
+  cursor: pointer; transition: var(--transition); border: 2px solid transparent; text-decoration: none;
+}
+.c-day-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(201,151,58,.18); }
+.c-day-card__num {
+  font-size: .72rem; font-weight: 800; color: var(--gold); background: var(--gold-pale);
+  border-radius: 50%; width: 2.1rem; height: 2.1rem; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.c-day-card__title { font-size: .88rem; font-weight: 700; color: var(--purple); line-height: 1.3; }
+.c-day-card__sub { font-size: .75rem; color: var(--text-muted); margin-top: .15rem; }
+.c-day-card.done .c-day-card__num { background: #e8f5e9; color: #2e7d32; }
+.c-day-card.done { border-color: #a5d6a7; }
+
+/* ── Companion progress ───────────────────────────────── */
+.c-progress-wrap { margin: 2rem 0 2.5rem; }
+.c-progress-label { display: flex; justify-content: space-between; font-size: .82rem; font-weight: 600; color: var(--text-muted); margin-bottom: .5rem; }
+.c-progress-bar { height: 8px; background: var(--purple-pale); border-radius: 50px; overflow: hidden; }
+.c-progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--purple-light)); border-radius: 50px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+
+/* ── Companion day sections ───────────────────────────── */
+.c-section { margin: 2.75rem 0; }
+.c-section h3 { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+.c-section h3::before {
+  content: ''; display: block; width: 4px; height: 1.25rem;
+  background: linear-gradient(to bottom, var(--gold), var(--purple-light)); border-radius: 2px; flex-shrink: 0;
+}
+.c-section__eyebrow { font-size: .72rem; font-weight: 800; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; }
+.c-section p { color: var(--text); line-height: 1.85; }
+.c-section p + p { margin-top: 1rem; }
+
+/* The Application — one honest question */
+.c-application {
+  background: linear-gradient(135deg, #f8f4ff, var(--purple-pale));
+  border: 1px solid rgba(124,92,191,.2); border-radius: var(--radius);
+  padding: 1.75rem 2rem; margin: 1rem 0; position: relative; overflow: hidden;
+}
+.c-application::before { content: '?'; position: absolute; top: .4rem; right: 1.1rem; font-family: var(--serif); font-size: 3rem; color: var(--gold); opacity: .22; }
+.c-application p { font-family: var(--serif); font-size: 1.12rem; font-style: italic; color: var(--purple-mid); line-height: 1.75; }
+
+/* The Verse — plain-language rewrite */
+.c-plain {
+  background: var(--white); border: 1px dashed rgba(124,92,191,.35);
+  border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-top: -.75rem;
+  font-size: .95rem; color: var(--text-muted); line-height: 1.75;
+}
+.c-plain strong { color: var(--purple); font-weight: 700; }
+
+/* The Gear Link */
+.c-gear-list { display: flex; flex-direction: column; gap: .6rem; }
+.c-gear-item {
+  display: grid; grid-template-columns: 150px 1fr; gap: 1rem; align-items: start;
+  background: var(--white); border-radius: var(--radius-sm); padding: .9rem 1.1rem;
+  box-shadow: var(--shadow-sm); border-left: 3px solid var(--purple-light); font-size: .92rem;
+}
+.c-gear-item__label { font-weight: 800; color: var(--purple); font-size: .8rem; letter-spacing: .03em; text-transform: uppercase; }
+.c-gear-item p { font-size: .92rem; color: var(--text); line-height: 1.65; }
+@media (max-width: 560px) { .c-gear-item { grid-template-columns: 1fr; gap: .25rem; } }
+
+/* Micro-commitments */
+.c-commit-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin-top: .5rem; }
+.c-commit-item {
+  display: flex; align-items: flex-start; gap: .75rem; background: var(--white);
+  border-radius: var(--radius-sm); padding: .85rem 1.1rem; box-shadow: var(--shadow-sm);
+  border-left: 3px solid var(--gold-pale); cursor: pointer; transition: var(--transition);
+  font-size: .93rem; color: var(--text);
+}
+.c-commit-item:hover { border-left-color: var(--gold); }
+.c-commit-item input { width: 1.1rem; height: 1.1rem; margin-top: .2rem; accent-color: var(--gold); flex-shrink: 0; cursor: pointer; }
+.c-commit-item.checked { color: var(--text-muted); text-decoration: line-through; border-left-color: #a5d6a7; }
+
+/* Signed name + date */
+.c-sign-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
+.c-sign-row .c-sign-field { flex: 1 1 180px; }
+.c-sign-row label { display: block; font-size: .72rem; font-weight: 700; color: var(--text-muted); letter-spacing: .05em; text-transform: uppercase; margin-bottom: .35rem; }
+.c-sign-row input {
+  width: 100%; border: 2px solid rgba(201,151,58,.2); border-radius: var(--radius-sm);
+  padding: .7rem .9rem; font-family: var(--sans); font-size: .95rem; background: var(--white); color: var(--text);
+}
+.c-sign-row input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201,151,58,.1); }
+.c-sign-name { font-family: var(--serif) !important; font-style: italic; font-size: 1.1rem !important; }
+
+/* Complete button (isolated from app.js .complete-btn) */
+.c-complete-btn {
+  display: block; width: 100%; padding: 1.1rem;
+  background: linear-gradient(135deg, var(--gold) 0%, #b5832a 100%);
+  color: var(--white); border: none; border-radius: 50px; font-size: 1rem; font-weight: 700;
+  cursor: pointer; margin: 2.5rem 0 1rem; transition: var(--transition); letter-spacing: .02em;
+  box-shadow: 0 4px 16px rgba(201,151,58,.35);
+}
+.c-complete-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,151,58,.45); }
+.c-complete-btn.done { background: linear-gradient(135deg, #43a047, #2e7d32); box-shadow: 0 4px 16px rgba(67,160,71,.3); }
+
+/* WhatsApp share */
+.btn--whatsapp { background: #25d366; color: #fff; border: none; }
+.btn--whatsapp:hover { background: #1ebe5a; color: #fff; }
+
+/* Day nav */
+.c-day-nav { display: flex; justify-content: space-between; align-items: center; gap: .75rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+
+/* Summary card (shown on plan completion) */
+.c-summary {
+  background: linear-gradient(150deg, var(--purple) 0%, #1a0f45 100%);
+  color: #fff; border-radius: var(--radius); padding: 2.5rem 2rem; text-align: center;
+  margin: 2rem 0; position: relative; overflow: hidden;
+}
+.c-summary::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(201,151,58,.22), transparent); }
+.c-summary > * { position: relative; z-index: 1; }
+.c-summary h2 { color: var(--gold-light); }
+.c-summary p { color: rgba(255,255,255,.82); }
+.c-summary__stat { font-family: var(--serif); font-size: 3rem; font-weight: 900; color: #fff; }
+.c-summary .btn--whatsapp { margin-top: 1.25rem; }
