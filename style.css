@@ -876,16 +876,16 @@ tr:hover td { background: var(--purple-pale); }
 }
 .c-plain strong { color: var(--purple); font-weight: 700; }
 
-/* The Gear Link */
-.c-gear-list { display: flex; flex-direction: column; gap: .6rem; }
-.c-gear-item {
+/* Where You Are */
+.c-situ-list { display: flex; flex-direction: column; gap: .6rem; }
+.c-situ-item {
   display: grid; grid-template-columns: 150px 1fr; gap: 1rem; align-items: start;
   background: var(--white); border-radius: var(--radius-sm); padding: .9rem 1.1rem;
   box-shadow: var(--shadow-sm); border-left: 3px solid var(--purple-light); font-size: .92rem;
 }
-.c-gear-item__label { font-weight: 800; color: var(--purple); font-size: .8rem; letter-spacing: .03em; text-transform: uppercase; }
-.c-gear-item p { font-size: .92rem; color: var(--text); line-height: 1.65; }
-@media (max-width: 560px) { .c-gear-item { grid-template-columns: 1fr; gap: .25rem; } }
+.c-situ-item__label { font-weight: 800; color: var(--purple); font-size: .8rem; letter-spacing: .03em; text-transform: uppercase; }
+.c-situ-item p { font-size: .92rem; color: var(--text); line-height: 1.65; }
+@media (max-width: 560px) { .c-situ-item { grid-template-columns: 1fr; gap: .25rem; } }
 
 /* Micro-commitments */
 .c-commit-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin-top: .5rem; }

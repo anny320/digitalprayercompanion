@@ -56,13 +56,13 @@
    Default translation: NIV.
    ════════════════════════════════════════════════════════ */
 
-/* Reset Gears seasons — order + display labels */
-const SEASONS = [
-  ['recovery',      'Recovery'],
-  ['stabilisation', 'Stabilisation'],
-  ['exploration',   'Exploration'],
-  ['execution',     'Execution'],
-  ['expansion',     'Expansion'],
+/* Where-you-are-now moments -- order + display labels */
+const SITUATIONS = [
+  ['drained',    'Running on empty'],
+  ['rebuilding', 'Rebuilding'],
+  ['unsure',     'Not sure what’s next'],
+  ['deep',       'In the thick of it'],
+  ['rising',     'On the rise'],
 ];
 
 const PLANS = {
@@ -85,12 +85,12 @@ const PLANS = {
           { text: "David said to the Philistine, \"You come against me with sword and spear and javelin, but I come against you in the name of the Lord Almighty.\"", ref: "1 Samuel 17:45 (NIV)" }
         ],
         plain: "David basically said: you've got all the gear and the size advantage — but you've misjudged what this fight is actually about.",
-        gear: {
-          recovery:      "You don't have to feel strong to start. David wasn't a trained soldier — he just refused to keep standing still.",
-          stabilisation: "Go to the stream first. Gather the few steady, to-hand things you already trust before you face the loud thing.",
-          exploration:   "Take off the borrowed armour. Someone else's method may not fit you — test your own before the moment of truth.",
-          execution:     "Five stones, one throw. You don't need a perfect plan, just the first real action taken before the nerve fades.",
-          expansion:     "David's one yes moved a whole army off the hillside. Your courage quietly gives permission to everyone watching.",
+        situations: {
+          drained:      "You don't have to feel strong to start. David wasn't a trained soldier — he just refused to keep standing still.",
+          rebuilding: "Go to the stream first. Gather the few steady, to-hand things you already trust before you face the loud thing.",
+          unsure:   "Take off the borrowed armour. Someone else's method may not fit you — test your own before the moment of truth.",
+          deep:     "Five stones, one throw. You don't need a perfect plan, just the first real action taken before the nerve fades.",
+          rising:     "David's one yes moved a whole army off the hillside. Your courage quietly gives permission to everyone watching.",
         },
         prompt: "Name your giant plainly — the thing you've been walking past for days or weeks. How long have you actually been standing in the valley staring at it? Now describe the first stone: the smallest honest action you could take in the next 24 hours.",
         commitments: [
@@ -120,12 +120,12 @@ const PLANS = {
           { text: "All at once an angel touched him and said, \"Get up and eat.\" ... \"Get up and eat, for the journey is too much for you.\"", ref: "1 Kings 19:5,7 (NIV)" }
         ],
         plain: "God didn't say 'try harder.' He said: eat something, sleep, the road is genuinely too much right now — and that's okay.",
-        gear: {
-          recovery:      "This is your day. Heaven's prescription for exhaustion was bread, water, and sleep — in that order, before any talking.",
-          stabilisation: "Notice the pattern: eat, rest, eat, rest, then the conversation. Rebuild the basics before you try to make big decisions.",
-          exploration:   "You can't hear the 'gentle whisper' that comes later in this chapter while you're still running. Stop first, listen second.",
-          execution:     "Even in a push season, two meals and real sleep aren't optional extras — they're the fuel the push runs on.",
-          expansion:     "Elijah thought he was finished. God was actually recommissioning him. Rest is often the setup for what's next, not the end.",
+        situations: {
+          drained:      "This is your day. Heaven's prescription for exhaustion was bread, water, and sleep — in that order, before any talking.",
+          rebuilding: "Notice the pattern: eat, rest, eat, rest, then the conversation. Rebuild the basics before you try to make big decisions.",
+          unsure:   "You can't hear the 'gentle whisper' that comes later in this chapter while you're still running. Stop first, listen second.",
+          deep:     "Even in a push season, two meals and real sleep aren't optional extras — they're the fuel the push runs on.",
+          rising:     "Elijah thought he was finished. God was actually recommissioning him. Rest is often the setup for what's next, not the end.",
         },
         prompt: "Where are you running right now — and what are you running from? Be honest about how tired you actually are. What would 'bread, water, and sleep' look like for you this week, practically?",
         commitments: [
@@ -145,12 +145,12 @@ const PLANS = {
           { text: "The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul.", ref: "Psalm 23:1–3 (NIV)" }
         ],
         plain: "I'm looked after, so I'm not running on empty. I'm made to stop in a safe place and drink from calm water — and that's where I get put back together.",
-        gear: {
-          recovery:      "You are the sheep being made to lie down. Let yourself be led to still water instead of forcing your own pace.",
-          stabilisation: "Green pastures and quiet water are the stable inputs. Build a few of them into your week on purpose.",
-          exploration:   "'He leads' — you don't have to see the whole route to take the next step beside the water.",
-          execution:     "Even the valley is walked 'through,' not camped in. Keep moving, but at the shepherd's pace, not panic's.",
-          expansion:     "The table is set 'in the presence of my enemies.' Rest and provision can coexist with pressure — they don't wait for it to clear.",
+        situations: {
+          drained:      "You are the sheep being made to lie down. Let yourself be led to still water instead of forcing your own pace.",
+          rebuilding: "Green pastures and quiet water are the stable inputs. Build a few of them into your week on purpose.",
+          unsure:   "'He leads' — you don't have to see the whole route to take the next step beside the water.",
+          deep:     "Even the valley is walked 'through,' not camped in. Keep moving, but at the shepherd's pace, not panic's.",
+          rising:     "The table is set 'in the presence of my enemies.' Rest and provision can coexist with pressure — they don't wait for it to clear.",
         },
         prompt: "Where is your 'green pasture' — the place or practice that genuinely refreshes you? When did you last go there? What's the fear or hunger keeping you on your feet when you could lie down?",
         commitments: [
@@ -170,12 +170,12 @@ const PLANS = {
           { text: "\"Martha, Martha,\" the Lord answered, \"you are worried and upset about many things, but few things are needed — or indeed only one.\"", ref: "Luke 10:41–42 (NIV)" }
         ],
         plain: "You're spinning over a hundred things. Almost none of them are the point. One is.",
-        gear: {
-          recovery:      "If serving has turned to resentment, that's your signal to sit down before you do more — not push through.",
-          stabilisation: "Sort the 'many things' into what's truly needed and what's just noise. Stability starts with that honest list.",
-          exploration:   "Mary 'chose.' Rest can be an active choice about where your attention goes, not just the absence of tasks.",
-          execution:     "In a delivery season, protect the one thing. Everything else is negotiable; the main thing can't become the maybe thing.",
-          expansion:     "More capacity without more focus just scales the busyness. Expand the one thing, not the hundred.",
+        situations: {
+          drained:      "If serving has turned to resentment, that's your signal to sit down before you do more — not push through.",
+          rebuilding: "Sort the 'many things' into what's truly needed and what's just noise. Stability starts with that honest list.",
+          unsure:   "Mary 'chose.' Rest can be an active choice about where your attention goes, not just the absence of tasks.",
+          deep:     "In a delivery season, protect the one thing. Everything else is negotiable; the main thing can't become the maybe thing.",
+          rising:     "More capacity without more focus just scales the busyness. Expand the one thing, not the hundred.",
         },
         prompt: "List the 'many things' you're worried and upset about this week — get them all out. Now circle the one. What would it look like to put the one first tomorrow, before the hundred?",
         commitments: [
@@ -195,12 +195,12 @@ const PLANS = {
           { text: "By the seventh day God had finished the work he had been doing; so on the seventh day he rested from all his work.", ref: "Genesis 2:2 (NIV)" }
         ],
         plain: "Even God built a full stop into the week — on purpose, as a blessing, not because He'd run out of energy.",
-        gear: {
-          recovery:      "Permission, in writing, from page two of the Bible: stopping is holy, not lazy. Take the day.",
-          stabilisation: "A fixed weekly stop is the single most stabilising rhythm you can set. Pick the day and protect it.",
-          exploration:   "The manna taught trust one day at a time. You can experiment with stopping before you've figured out the whole system.",
-          execution:     "'Gather double on the sixth' — plan ahead so the rest day holds. Rest is scheduled, not stumbled into.",
-          expansion:     "Hoarding rotted; trusting held. Growth that never stops isn't growth, it's just accumulation that spoils.",
+        situations: {
+          drained:      "Permission, in writing, from page two of the Bible: stopping is holy, not lazy. Take the day.",
+          rebuilding: "A fixed weekly stop is the single most stabilising rhythm you can set. Pick the day and protect it.",
+          unsure:   "The manna taught trust one day at a time. You can experiment with stopping before you've figured out the whole system.",
+          deep:     "'Gather double on the sixth' — plan ahead so the rest day holds. Rest is scheduled, not stumbled into.",
+          rising:     "Hoarding rotted; trusting held. Growth that never stops isn't growth, it's just accumulation that spoils.",
         },
         prompt: "What's your relationship with stopping — do you treat rest as earned or as given? Describe one fixed 'stop' you could build into your week. What comes up in you when you imagine not working during it?",
         commitments: [
@@ -220,12 +220,12 @@ const PLANS = {
           { text: "\"Come to me, all you who are weary and burdened, and I will give you rest. Take my yoke upon you and learn from me... For my yoke is easy and my burden is light.\"", ref: "Matthew 11:28–30 (NIV)" }
         ],
         plain: "Worn out? Come here. Swap the load that's crushing you for one that actually fits, and stop pulling it on your own.",
-        gear: {
-          recovery:      "Start with the first word: come. Before fixing anything, just bring the tiredness here and set it down.",
-          stabilisation: "A fitted yoke doesn't chafe. Check which loads are yours to carry and which were strapped on by someone else.",
-          exploration:   "'Learn from me.' Rest can be a season of relearning your pace, not just pausing the old one.",
-          execution:     "Pulling in a yoke still means pulling — but in step, and not solo. Find the person you're meant to pull alongside.",
-          expansion:     "You can carry more when the load is shared and fitted. Scale the partnership, not the strain.",
+        situations: {
+          drained:      "Start with the first word: come. Before fixing anything, just bring the tiredness here and set it down.",
+          rebuilding: "A fitted yoke doesn't chafe. Check which loads are yours to carry and which were strapped on by someone else.",
+          unsure:   "'Learn from me.' Rest can be a season of relearning your pace, not just pausing the old one.",
+          deep:     "Pulling in a yoke still means pulling — but in step, and not solo. Find the person you're meant to pull alongside.",
+          rising:     "You can carry more when the load is shared and fitted. Scale the partnership, not the strain.",
         },
         prompt: "Name the heaviest thing you're carrying this season. Is it genuinely yours — or did someone hand it to you, or did you pick it up out of habit? What would 'coming' and setting it down actually look like this week?",
         commitments: [
@@ -245,12 +245,12 @@ const PLANS = {
           { text: "But while he was still a long way off, his father saw him and was filled with compassion for him; he ran to his son, threw his arms around him and kissed him.", ref: "Luke 15:20 (NIV)" }
         ],
         plain: "He was still far down the road, mid-apology in his head, when his dad spotted him and sprinted to him — no lecture, just arms open.",
-        gear: {
-          recovery:      "You don't have to arrive fixed. The father ran to the son mid-mess, 'still a long way off.' Come as you are.",
-          stabilisation: "The robe, ring, and feast re-established his place. Let yourself be re-rooted in belonging before performance.",
-          exploration:   "'He came to his senses.' Honest reflection about where you've wandered is the first step home — not the last.",
-          execution:     "Drop the repayment plan. Striving to earn back what's freely given just burns energy you need elsewhere.",
-          expansion:     "The feast was for the whole house. Being welcomed home frees you to welcome others instead of guarding your worth.",
+        situations: {
+          drained:      "You don't have to arrive fixed. The father ran to the son mid-mess, 'still a long way off.' Come as you are.",
+          rebuilding: "The robe, ring, and feast re-established his place. Let yourself be re-rooted in belonging before performance.",
+          unsure:   "'He came to his senses.' Honest reflection about where you've wandered is the first step home — not the last.",
+          deep:     "Drop the repayment plan. Striving to earn back what's freely given just burns energy you need elsewhere.",
+          rising:     "The feast was for the whole house. Being welcomed home frees you to welcome others instead of guarding your worth.",
         },
         prompt: "Where in your life are you running a 'repayment plan' — trying to earn back approval, trust, or a sense of worth? Who or what are you trying to earn it from? Write the sentence you'd most want to hear from them — and sit with the idea that grace might get there first.",
         commitments: [
@@ -270,12 +270,12 @@ const PLANS = {
           { text: "Surely your goodness and love will follow me all the days of my life, and I will dwell in the house of the Lord forever.", ref: "Psalm 23:6 (NIV)" }
         ],
         plain: "Good things and steady kindness aren't just ahead of me — they're trailing me the whole way. I'm not a visitor to that; it's home.",
-        gear: {
-          recovery:      "Restoration is ongoing, not a finish line. Let 'he restores my soul' be a daily return, not a one-off repair.",
-          stabilisation: "'Goodness and mercy follow me all the days' — build your rhythm on what's constant, not on how you feel today.",
-          exploration:   "The valley gets walked 'through.' Keep moving into what's next, carrying the rest you found here.",
-          execution:     "The overflowing cup sits 'in the presence of enemies' — you can execute under pressure from a place of fullness, not fumes.",
-          expansion:     "A restored soul has something to pour out. What you received this week, you're now carrying for others.",
+        situations: {
+          drained:      "Restoration is ongoing, not a finish line. Let 'he restores my soul' be a daily return, not a one-off repair.",
+          rebuilding: "'Goodness and mercy follow me all the days' — build your rhythm on what's constant, not on how you feel today.",
+          unsure:   "The valley gets walked 'through.' Keep moving into what's next, carrying the rest you found here.",
+          deep:     "The overflowing cup sits 'in the presence of enemies' — you can execute under pressure from a place of fullness, not fumes.",
+          rising:     "A restored soul has something to pour out. What you received this week, you're now carrying for others.",
         },
         prompt: "Look back over the week — Elijah, the shepherd, the one thing, the day God stopped, the fitted yoke, the long way home. Which day met you most? What did this week teach you about the difference between merely stopping and actually being restored? Name the one rhythm you're keeping.",
         commitments: [
@@ -432,10 +432,10 @@ function renderDayView(plan, n) {
     : `<a href="companion.html?plan=${plan}" class="btn btn--primary">Finish →</a>`;
 
   const verses = day.verses.map(v => `"${v.text}"<cite>— ${v.ref}</cite>`).join('<br><br>');
-  const gear = SEASONS.map(([k, label]) => `
-    <div class="c-gear-item">
-      <div class="c-gear-item__label">${label}</div>
-      <p>${day.gear[k]}</p>
+  const situations = SITUATIONS.map(([k, label]) => `
+    <div class="c-situ-item">
+      <div class="c-situ-item__label">${label}</div>
+      <p>${day.situations[k]}</p>
     </div>`).join('');
 
   const sign = d[signKey(plan, n)] || {};
@@ -487,9 +487,9 @@ function renderDayView(plan, n) {
       </div>
 
       <div class="c-section">
-        <div class="c-section__eyebrow">The Gear Link</div>
-        <h3>Wherever you are in your season</h3>
-        <div class="c-gear-list">${gear}</div>
+        <div class="c-section__eyebrow">Where You Are</div>
+        <h3>Wherever you are right now</h3>
+        <div class="c-situ-list">${situations}</div>
       </div>
 
       <div class="c-section">
